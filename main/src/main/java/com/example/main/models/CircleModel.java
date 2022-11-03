@@ -5,17 +5,22 @@ import javafx.scene.paint.Color;
 
 public class CircleModel extends ShapeModel{
 
-    private Color color;
+    public CircleModel() {
 
-    private double width;
-    
-    private double height;
-
+    }
 
 
     @Override
-    public void drawMe(GraphicsContext context, double x, double y) {
-        context.fillOval(x, y, width, height);
+    public void drawMe(GraphicsContext context, double startX, double startY, double width, double height) {
+        this.setWidth(width);
+        this.setHeight(height);
+        context.setFill(getColor());
+        context.fillOval(startX,startY,width,height);
+    }
+
+    @Override
+    public void redrawMe(GraphicsContext context) {
+
     }
 
     @Override
@@ -28,22 +33,14 @@ public class CircleModel extends ShapeModel{
 
     }
 
-    public CircleModel(double width, double height, Color color){
-        this.width = width;
-        this.height = height;
-        this.color = color;
+    @Override
+    public ShapeModel createCopy(double startX, double startY) {
+        return new CircleModel(startX, startY);
+    }
+    public CircleModel(double startX, double startY){
+        super(startX, startY);
+        this.setColor(Color.BLUE);
     }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
     
 }

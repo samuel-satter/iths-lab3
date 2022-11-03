@@ -5,13 +5,23 @@ import javafx.scene.paint.Color;
 
 public class SquareModel extends ShapeModel{
 
-    private Color color;
-    private double side;
+    public SquareModel() {
+        super();
+    }
 
 
     @Override
-    public void drawMe(GraphicsContext context, double x, double y) {
-        context.fillRect(x, y, side, side);
+    public void drawMe(GraphicsContext context, double startX, double startY, double width, double height) {
+        this.setWidth(width);
+        this.setHeight(height);
+        context.setFill(getColor());
+        context.fillRect(startX,startY,width,height);
+    }
+
+    @Override
+    public void redrawMe(GraphicsContext context) {
+        context.setFill(getColor());
+        context.fillRect(getStartX(), getStartY(), getWidth(), getHeight());
     }
 
     @Override
@@ -24,18 +34,16 @@ public class SquareModel extends ShapeModel{
 
     }
 
-    public SquareModel(double side, Color color){
-        this.side = side;
-        this.color = color;
+    @Override
+    public ShapeModel createCopy(double startX, double startY) {
+        return new SquareModel(startX, startY);
     }
 
-    public void setSide(double side) {
-        this.side = side;
+    public SquareModel(double startX, double startY){
+        super(startX, startY);
+        this.setColor(Color.BLACK);
     }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
 
 }
 
