@@ -14,6 +14,16 @@ public class SquareModel extends ShapeModel{
         context.fillRect(x, y, side, side);
     }
 
+    @Override
+    public void changeMyColor(GraphicsContext context) {
+
+    }
+
+    @Override
+    public void changeMySize(double x, double y) {
+
+    }
+
     public SquareModel(double side, Color color){
         this.side = side;
         this.color = color;
@@ -28,4 +38,4 @@ public class SquareModel extends ShapeModel{
     }
 
 }
-record Position(double x, double y){}
+

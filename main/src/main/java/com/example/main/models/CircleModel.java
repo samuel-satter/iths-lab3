@@ -11,9 +11,21 @@ public class CircleModel extends ShapeModel{
     
     private double height;
 
+
+
     @Override
     public void drawMe(GraphicsContext context, double x, double y) {
         context.fillOval(x, y, width, height);
+    }
+
+    @Override
+    public void changeMyColor(GraphicsContext context) {
+
+    }
+
+    @Override
+    public void changeMySize(double x, double y) {
+
     }
 
     public CircleModel(double width, double height, Color color){

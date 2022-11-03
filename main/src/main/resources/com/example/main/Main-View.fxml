@@ -3,12 +3,18 @@
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.controllers.MainViewController">
-   <Canvas fx:id="canvas" height="600.0" onMouseClicked="#onCanvasClicked" width="660.0" />
-   <Button fx:id="squareButton" layoutX="696.0" layoutY="30.0" mnemonicParsing="false" onAction="#onSquareButtonSelect" prefHeight="25.0" prefWidth="60.0" text="Square" />
-   <Button fx:id="circleButton" layoutX="696.0" layoutY="80.0" mnemonicParsing="false" onAction="#onCircleButtonSelect" prefHeight="25.0" prefWidth="60.0" text="Circle" />
+   <Canvas fx:id="canvas" height="600.0" layoutX="6.0" onMouseClicked="#onCanvasClicked" width="660.0" />
+   <Button fx:id="squareButton" layoutX="696.0" layoutY="30.0" mnemonicParsing="false" onAction="#onSquareButtonPress" prefHeight="25.0" prefWidth="60.0" text="Square" />
+   <Button fx:id="circleButton" layoutX="696.0" layoutY="80.0" mnemonicParsing="false" onAction="#onCircleButtonPress" prefHeight="25.0" prefWidth="60.0" text="Circle" />
    <Button fx:id="lineButton" layoutX="696.0" layoutY="130.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Line" />
    <Separator layoutX="665.0" layoutY="179.0" prefHeight="5.0" prefWidth="121.0" />
-   <Separator layoutX="665.0" layoutY="8.0" orientation="VERTICAL" prefHeight="245.0" prefWidth="5.0" />
+   <Separator layoutX="666.0" layoutY="8.0" orientation="VERTICAL" prefHeight="324.0" prefWidth="5.0" />
+   <Separator layoutX="666.0" layoutY="330.0" prefHeight="5.0" prefWidth="121.0" />
+   <Text layoutX="715.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Draw" />
+   <Text layoutX="705.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change" />
+   <Button fx:id="ColorButton" layoutX="699.0" layoutY="211.0" mnemonicParsing="false" onAction="#onColorButtonPressed" prefHeight="25.0" prefWidth="60.0" text="Color" />
+   <Button fx:id="SizeButton" layoutX="699.0" layoutY="252.0" mnemonicParsing="false" onAction="#onSizeButtonPressed" prefHeight="25.0" prefWidth="60.0" text="Size" />
 </AnchorPane>
