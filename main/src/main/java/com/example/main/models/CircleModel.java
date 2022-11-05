@@ -11,21 +11,19 @@ public class CircleModel extends ShapeModel{
 
 
     @Override
-    public void drawMe(GraphicsContext context, double startX, double startY, double width, double height) {
-        this.setWidth(width);
-        this.setHeight(height);
+    public void drawMe(GraphicsContext context) {
         context.setFill(getColor());
-        context.fillOval(startX,startY,width,height);
+        context.fillOval(getStartX(), getStartY(), getWidth(), getHeight());
     }
 
     @Override
     public void redrawMe(GraphicsContext context) {
-
+        context.setFill(getColor());
+        context.fillOval(getStartX(), getStartY(), getWidth(), getHeight());
     }
 
     @Override
     public void changeMyColor(GraphicsContext context) {
-
     }
 
     @Override
@@ -34,11 +32,11 @@ public class CircleModel extends ShapeModel{
     }
 
     @Override
-    public ShapeModel createCopy(double startX, double startY) {
-        return new CircleModel(startX, startY);
+    public ShapeModel createCopy(double startX, double startY, double width, double height) {
+        return new CircleModel(startX, startY, width, height);
     }
-    public CircleModel(double startX, double startY){
-        super(startX, startY);
+    public CircleModel(double startX, double startY, double width, double height){
+        super(startX, startY, width, height);
         this.setColor(Color.BLUE);
     }
 

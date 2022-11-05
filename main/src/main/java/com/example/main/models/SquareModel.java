@@ -11,11 +11,9 @@ public class SquareModel extends ShapeModel{
 
 
     @Override
-    public void drawMe(GraphicsContext context, double startX, double startY, double width, double height) {
-        this.setWidth(width);
-        this.setHeight(height);
+    public void drawMe(GraphicsContext context) {
         context.setFill(getColor());
-        context.fillRect(startX,startY,width,height);
+        context.fillRect(getStartX(), getStartY(), getWidth(), getHeight());
     }
 
     @Override
@@ -35,12 +33,12 @@ public class SquareModel extends ShapeModel{
     }
 
     @Override
-    public ShapeModel createCopy(double startX, double startY) {
-        return new SquareModel(startX, startY);
+    public ShapeModel createCopy(double startX, double startY, double width, double height) {
+        return new SquareModel(startX, startY, width, height);
     }
 
-    public SquareModel(double startX, double startY){
-        super(startX, startY);
+    public SquareModel(double startX, double startY, double width, double height){
+        super(startX, startY, width, height);
         this.setColor(Color.BLACK);
     }
 
