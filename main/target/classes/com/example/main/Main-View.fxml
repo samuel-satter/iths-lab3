@@ -2,6 +2,7 @@
 
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
@@ -25,6 +26,7 @@
    <Button fx:id="SizeButton" layoutX="704.0" layoutY="245.0" mnemonicParsing="false" onAction="#onSizeButtonPressed" prefHeight="31.0" prefWidth="60.0" text="Size" />
    <Separator layoutX="669.0" layoutY="53.0" prefHeight="5.0" prefWidth="121.0" />
    <ToggleButton fx:id="toggleToDrawButton" layoutX="734.0" layoutY="14.0" mnemonicParsing="false" onAction="#onToggleToDraw" prefHeight="31.0" prefWidth="60.0" text="Draw" />
-   <TextField fx:id="changeColorTextField" layoutX="675.0" layoutY="300.0" onAction="#onColorButtonPressed" prefHeight="26.0" prefWidth="115.0" promptText="Enter new color!" />
-   <TextField fx:id="changeSizeTextField" layoutX="677.0" layoutY="326.0" onAction="#onSizeButtonPressed" prefHeight="26.0" prefWidth="115.0" promptText="Enter new size!" />
+   <TextField fx:id="changeSizeTextField" layoutX="677.0" layoutY="326.0" prefHeight="26.0" prefWidth="115.0" promptText="Enter new size!" />
+   <ColorPicker fx:id="ColorPicker" layoutX="672.0" layoutY="300.0" />
+   <Button fx:id="deleteButton" layoutX="709.0" layoutY="492.0" onAction="#onToggleToDelete" mnemonicParsing="false" prefWidth="60.0" text="Delete" />
 </AnchorPane>

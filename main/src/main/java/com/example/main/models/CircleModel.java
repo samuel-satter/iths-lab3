@@ -23,6 +23,12 @@ public class CircleModel extends ShapeModel{
     }
 
     @Override
+    public void deleteMe(GraphicsContext context, Color deleteColor) {
+        context.setFill(deleteColor);
+        context.fillOval(getStartX() - 1, getStartY() - 1, getWidth() + 5, getHeight() + 5);
+    }
+
+    @Override
     public void changeMyColor(GraphicsContext context) {
     }
 

@@ -1,6 +1,7 @@
 package com.example.main.models;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 
 public abstract class ShapeModel {
@@ -21,15 +22,18 @@ public abstract class ShapeModel {
 
     public abstract void redrawMe(GraphicsContext context);
 
+    public abstract void deleteMe(GraphicsContext context, Color deleteColor);
+
     public abstract void changeMyColor(GraphicsContext context);
 
     public abstract void changeMySize(double x, double y);
 
     public abstract ShapeModel createCopy(double startX, double startY, double width, double height);
 
+
+
     public ShapeModel(){
     }
-
 
     public ShapeModel(double startX, double startY, double width, double height){
         this.startX = startX;
