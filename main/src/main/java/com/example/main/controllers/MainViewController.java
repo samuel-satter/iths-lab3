@@ -41,6 +41,8 @@ public class MainViewController {
 
     public Button deleteButton;
 
+    public Button undoButton;
+
     private Mode mode;
 
     private boolean isChangingColor;
@@ -103,6 +105,23 @@ public class MainViewController {
         changeSizeTextField.setVisible(false);
         System.out.println("button pressed");
     }
+    @FXML
+    public void onPressedToUndo(ActionEvent buttonPressed) {
+        System.out.println("button pressed");
+        if (listOfPositions.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("No shapes to undo");
+            alert.show();
+            return;
+        }
+        System.out.println(listOfPositions);
+        ShapeModel shapeModel = listOfPositions.get(listOfPositions.size() - 1);
+        shapeModel.deleteMe(context, Color.WHITE);
+
+        listOfPositions = listOfPositions.subList(0, listOfPositions.size() - 1);
+        System.out.println(listOfPositions);
+
+    }
 
     public void onCanvasClicked(MouseEvent mouseEvent) {
         getSelectedShapeModel(mouseEvent);
@@ -125,6 +144,7 @@ public class MainViewController {
         }
 
     }
+
     public void selectShapeToDelete(MouseEvent mouseEvent){
         Optional<ShapeModel> optionalShapeModel = getSelectedShapeModel(mouseEvent);
         optionalShapeModel.ifPresent(shapeModel -> {
