@@ -28,15 +28,6 @@ public class SquareModel extends ShapeModel{
         context.fillRect(getStartX() - 1, getStartY() - 1, getWidth() + 5, getHeight() + 5);
     }
 
-    @Override
-    public void changeMyColor(GraphicsContext context) {
-
-    }
-
-    @Override
-    public void changeMySize(double x, double y) {
-
-    }
 
     @Override
     public ShapeModel createCopy(double startX, double startY, double width, double height) {

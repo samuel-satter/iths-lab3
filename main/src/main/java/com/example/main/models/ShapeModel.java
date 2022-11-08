@@ -24,9 +24,6 @@ public abstract class ShapeModel {
 
     public abstract void deleteMe(GraphicsContext context, Color deleteColor);
 
-    public abstract void changeMyColor(GraphicsContext context);
-
-    public abstract void changeMySize(double x, double y);
 
     public abstract ShapeModel createCopy(double startX, double startY, double width, double height);
 

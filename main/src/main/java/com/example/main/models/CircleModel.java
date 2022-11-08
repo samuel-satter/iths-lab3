@@ -29,15 +29,6 @@ public class CircleModel extends ShapeModel{
     }
 
     @Override
-    public void changeMyColor(GraphicsContext context) {
-    }
-
-    @Override
-    public void changeMySize(double x, double y) {
-
-    }
-
-    @Override
     public ShapeModel createCopy(double startX, double startY, double width, double height) {
         return new CircleModel(startX, startY, width, height);
     }

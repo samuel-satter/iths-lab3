@@ -13,7 +13,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +36,7 @@ public class MainViewController {
 
     public TextField changeSizeTextField;
 
-    public javafx.scene.control.ColorPicker ColorPicker;
+    public javafx.scene.control.ColorPicker colorPicker;
 
     public Button deleteButton;
 
@@ -59,13 +58,15 @@ public class MainViewController {
 
     List<ShapeModel> listOfPositions = new ArrayList<>();
 
+    Alert illegalArgumentAlert;
+
     public void initialize() {
         context = canvas.getGraphicsContext2D();
         currentShape = squareFactory;
         ToggleGroup toggleGroup = new ToggleGroup();
         toggleToDrawButton.setToggleGroup(toggleGroup);
         toggleToChangeButton.setToggleGroup(toggleGroup);
-        ColorPicker.setVisible(false);
+        colorPicker.setVisible(false);
         changeSizeTextField.setVisible(false);
         isChangingColor = true;
         mode = Mode.DRAW;
@@ -87,7 +88,7 @@ public class MainViewController {
     @FXML
     public void onToggleToDraw(ActionEvent buttonPressed) {
         mode = Mode.DRAW;
-        ColorPicker.setVisible(false);
+        colorPicker.setVisible(false);
         changeSizeTextField.setVisible(false);
         System.out.println("button pressed");
     }
@@ -101,7 +102,7 @@ public class MainViewController {
     @FXML
     public void onToggleToDelete(ActionEvent buttonPressed) {
         mode = Mode.DELETE;
-        ColorPicker.setVisible(false);
+        colorPicker.setVisible(false);
         changeSizeTextField.setVisible(false);
         System.out.println("button pressed");
     }
@@ -109,9 +110,9 @@ public class MainViewController {
     public void onPressedToUndo(ActionEvent buttonPressed) {
         System.out.println("button pressed");
         if (listOfPositions.isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("No shapes to undo");
-            alert.show();
+            illegalArgumentAlert = new Alert(Alert.AlertType.ERROR);
+            illegalArgumentAlert.setContentText("No shapes to undo");
+            illegalArgumentAlert.show();
             return;
         }
         System.out.println(listOfPositions);
@@ -130,9 +131,9 @@ public class MainViewController {
             listOfPositions.add(shapeObject);
             shapeObject.drawMe(context);
         } else if (getSelectedShapeModel(mouseEvent).isEmpty()) {
-            Alert errorMessage = new Alert(Alert.AlertType.ERROR);
-            errorMessage.setHeaderText("Please select draw mode");
-            errorMessage.show();
+            illegalArgumentAlert = new Alert(Alert.AlertType.ERROR);
+            illegalArgumentAlert.setHeaderText("Please select draw mode");
+            illegalArgumentAlert.show();
         } else {
             if (mode == Mode.CHANGE && isChangingColor) {
                 selectShapeToChangeColorOf(mouseEvent);
@@ -170,7 +171,7 @@ public class MainViewController {
     public void selectShapeToChangeColorOf(MouseEvent mouseEvent) {
         if (mode != Mode.DRAW) {
             Optional<ShapeModel> optionalShapeModel = getSelectedShapeModel(mouseEvent);
-            optionalShapeModel.ifPresent(model -> model.setColor(ColorPicker.getValue()));
+            optionalShapeModel.ifPresent(model -> model.setColor(colorPicker.getValue()));
         }
     }
 
@@ -178,10 +179,10 @@ public class MainViewController {
     public void onColorButtonPressed() {
         isChangingColor = true;
         if (mode == Mode.DRAW) {
-            ColorPicker.setVisible(false);
+            colorPicker.setVisible(false);
         } else {
             changeSizeTextField.setVisible(false);
-            ColorPicker.setVisible(true);
+            colorPicker.setVisible(true);
         }
     }
 
@@ -191,7 +192,7 @@ public class MainViewController {
         if (mode == Mode.DRAW) {
             changeSizeTextField.setVisible(false);
         } else {
-            ColorPicker.setVisible(false);
+            colorPicker.setVisible(false);
             changeSizeTextField.setVisible(true);
         }
     }
@@ -205,23 +206,6 @@ public class MainViewController {
         return listOfPositions.stream()
                 .filter(shapeModel -> isHoveringOverShape(mouseEvent, shapeModel))
                 .findAny();
-    }
-
-    public void onMouseHoverHighlightObject2(MouseEvent mouseEvent) {
-        for (ShapeModel shapeModel : listOfPositions) {
-            if (isHoveringOverShape(mouseEvent, shapeModel)) {
-                shapeModel.setShapeSelected(true);
-                System.out.println("found shape");
-                Color color = shapeModel.getColor();
-                shapeModel.setColor(Color.BLUEVIOLET);
-                shapeModel.redrawMe(context);
-                shapeModel.setColor(color);
-            } else {
-                shapeModel.setShapeSelected(false);
-                shapeModel.redrawMe(context);
-            }
-        }
-
     }
 
     public void onMouseHoverHighlightObject(MouseEvent mouseEvent) {
