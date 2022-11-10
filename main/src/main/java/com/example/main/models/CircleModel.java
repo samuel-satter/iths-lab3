@@ -3,12 +3,10 @@ package com.example.main.models;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class CircleModel extends ShapeModel{
+public class CircleModel extends ShapeModel {
 
     public CircleModel() {
-
     }
-
 
     @Override
     public void drawMe(GraphicsContext context) {
@@ -32,10 +30,10 @@ public class CircleModel extends ShapeModel{
     public ShapeModel createCopy(double startX, double startY, double width, double height) {
         return new CircleModel(startX, startY, width, height);
     }
-    public CircleModel(double startX, double startY, double width, double height){
+
+    public CircleModel(double startX, double startY, double width, double height) {
         super(startX, startY, width, height);
         this.setColor(Color.BLUE);
     }
 
-    
 }

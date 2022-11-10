@@ -7,9 +7,7 @@ import java.util.List;
 
 public class SaveModel {
     public void writeToFile(List<ShapeModel> list){
-        File file = new File(".");
         try {
-            System.out.println(file.getAbsolutePath());
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("<svg width=\"800\" height=\"600\" xmlns=\"http://www.w3.org/2000/svg\"> ");
             getShapePositionsToDraw(stringBuilder, list);
@@ -31,11 +29,6 @@ public class SaveModel {
                 stringBuilder.append("\"").append((int) shapeModel.getStartY()).append("\"");
                 stringBuilder.append(" r=");
                 stringBuilder.append("\"").append((int) shapeModel.getWidth() / 2).append("\"");
-                stringBuilder.append(" ");
-                stringBuilder.append("fill= ");
-                stringBuilder.append("\"" + "#" + shapeModel.getColor().toString().substring(2, 8)+ "\"");
-                stringBuilder.append(" ");
-                stringBuilder.append(" />");
 
             }
             else{
@@ -50,12 +43,12 @@ public class SaveModel {
                 stringBuilder.append(" ");
                 stringBuilder.append("height= ");
                 stringBuilder.append("\"").append((int) shapeModel.getHeight()).append("\"");
-                stringBuilder.append(" ");
-                stringBuilder.append("fill= ");
-                stringBuilder.append("\"" + "#" + shapeModel.getColor().toString().substring(2, 8) + "\"");
-                stringBuilder.append(" ");
-                stringBuilder.append(" />");
             }
+            stringBuilder.append(" ");
+            stringBuilder.append("fill= ");
+            stringBuilder.append("\"" + "#").append(shapeModel.getColor().toString(), 2, 8).append("\"");
+            stringBuilder.append(" ");
+            stringBuilder.append(" />");
 
         });
     }

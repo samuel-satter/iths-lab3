@@ -8,8 +8,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -68,20 +66,16 @@ public class MainViewController {
         changeSizeTextField.setVisible(false);
         isChangingColor = true;
         mode = Mode.DRAW;
-
     }
 
-
     @FXML
-    public void onCircleButtonPress(ActionEvent buttonPressed) throws IOException {
+    public void onCircleButtonPress(ActionEvent buttonPressed) {
         currentShape = circleFactory;
-        System.out.println("button pressed");
     }
 
     @FXML
     public void onSquareButtonPress(ActionEvent buttonPressed) {
         currentShape = squareFactory;
-        System.out.println("button pressed");
     }
 
     @FXML
@@ -89,13 +83,11 @@ public class MainViewController {
         mode = Mode.DRAW;
         colorPicker.setVisible(false);
         changeSizeTextField.setVisible(false);
-        System.out.println("button pressed");
     }
 
     @FXML
     public void onToggleToChange(ActionEvent buttonPressed) {
         mode = Mode.CHANGE;
-        System.out.println("button pressed");
     }
 
     @FXML
@@ -103,27 +95,24 @@ public class MainViewController {
         mode = Mode.DELETE;
         colorPicker.setVisible(false);
         changeSizeTextField.setVisible(false);
-        System.out.println("button pressed");
     }
+
     @FXML
     public void onPressedToUndo(ActionEvent buttonPressed) {
-        System.out.println("button pressed");
         if (listOfPositions.isEmpty()){
             illegalArgumentAlert = new Alert(Alert.AlertType.ERROR);
             illegalArgumentAlert.setContentText("No shapes to undo");
             illegalArgumentAlert.show();
             return;
         }
-        System.out.println(listOfPositions);
         ShapeModel shapeModel = listOfPositions.get(listOfPositions.size() - 1);
         shapeModel.deleteMe(context, Color.WHITE);
 
         listOfPositions = listOfPositions.subList(0, listOfPositions.size() - 1);
-        System.out.println(listOfPositions);
-
     }
+
     @FXML
-    public void onSaveButtonPressed(ActionEvent buttonpressed) throws IOException {
+    public void onSaveButtonPressed(ActionEvent buttonpressed) {
         SaveModel saveModel = new SaveModel();
         saveModel.writeToFile(listOfPositions);
     }
@@ -201,10 +190,11 @@ public class MainViewController {
         }
     }
 
-    private boolean isHoveringOverShape(MouseEvent mouseEvent, ShapeModel shapeModel) {
-        return mouseEvent.getX() >= shapeModel.getStartX() && mouseEvent.getX() <= shapeModel.getStartX() + shapeModel.getWidth()
-                && mouseEvent.getY() >= shapeModel.getStartY() && mouseEvent.getY() <= shapeModel.getStartY() + shapeModel.getHeight();
+    boolean isHoveringOverShape(MouseEvent mouseEvent, ShapeModel shapeModel) {
+        return shapeModel.isHoveringOver(mouseEvent.getX(), mouseEvent.getY());
     }
+
+
 
     private Optional<ShapeModel> getSelectedShapeModel(MouseEvent mouseEvent) {
         return listOfPositions.stream()
@@ -217,7 +207,6 @@ public class MainViewController {
             isHoveringOverShape(mouseEvent, shapeModel);
             if (isHoveringOverShape(mouseEvent, shapeModel)) {
                 shapeModel.setShapeSelected(true);
-                System.out.println("found shape");
                 Color color = shapeModel.getColor();
                 shapeModel.setColor(Color.BLUEVIOLET);
                 shapeModel.redrawMe(context);

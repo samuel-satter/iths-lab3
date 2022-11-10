@@ -1,7 +1,6 @@
 package com.example.main.models;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 
 public abstract class ShapeModel {
@@ -24,7 +23,6 @@ public abstract class ShapeModel {
 
     public abstract void deleteMe(GraphicsContext context, Color deleteColor);
 
-
     public abstract ShapeModel createCopy(double startX, double startY, double width, double height);
 
 
@@ -37,6 +35,10 @@ public abstract class ShapeModel {
         this.startY = startY;
         this.width = width;
         this.height = height;
+    }
+    public boolean isHoveringOver(double startX, double startY){
+        return startX >= getStartX() && startX <=getStartX() + getWidth()
+                && startY >= getStartY() && startY<= getStartY() + getHeight();
     }
 
     public boolean isShapeSelected() {
