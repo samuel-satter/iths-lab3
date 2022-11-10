@@ -1,9 +1,6 @@
 package com.example.main.controllers;
 
-import com.example.main.models.CircleModel;
-import com.example.main.models.Mode;
-import com.example.main.models.ShapeModel;
-import com.example.main.models.SquareModel;
+import com.example.main.models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -12,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,11 +40,11 @@ public class MainViewController {
 
     public Button undoButton;
 
+    public Button saveButton;
+
     private Mode mode;
 
     private boolean isChangingColor;
-
-    private boolean isDrawMode;
 
     private ShapeModel currentShape;
 
@@ -60,7 +58,7 @@ public class MainViewController {
 
     Alert illegalArgumentAlert;
 
-    public void initialize() {
+    public void initialize(){
         context = canvas.getGraphicsContext2D();
         currentShape = squareFactory;
         ToggleGroup toggleGroup = new ToggleGroup();
@@ -70,11 +68,12 @@ public class MainViewController {
         changeSizeTextField.setVisible(false);
         isChangingColor = true;
         mode = Mode.DRAW;
+
     }
 
 
     @FXML
-    public void onCircleButtonPress(ActionEvent buttonPressed) {
+    public void onCircleButtonPress(ActionEvent buttonPressed) throws IOException {
         currentShape = circleFactory;
         System.out.println("button pressed");
     }
@@ -122,6 +121,11 @@ public class MainViewController {
         listOfPositions = listOfPositions.subList(0, listOfPositions.size() - 1);
         System.out.println(listOfPositions);
 
+    }
+    @FXML
+    public void onSaveButtonPressed(ActionEvent buttonpressed) throws IOException {
+        SaveModel saveModel = new SaveModel();
+        saveModel.writeToFile(listOfPositions);
     }
 
     public void onCanvasClicked(MouseEvent mouseEvent) {
